@@ -3,29 +3,27 @@ package graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
 public class ImageLoader {
+
 	private Display display;
 	private File file;
-	byte[] imageBytes;
-
+	private ImagePanel currentImage;
 
 	public ImageLoader() {
-		display.getInstance();
-		Display.getAddImage().addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		display = Display.getInstance();
+		display.getAddImage().addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent evt) {
 				setFile(chooseFile());
+
 				try {
-					loadImage();
+					loadImage(file);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -34,23 +32,29 @@ public class ImageLoader {
 		});
 	}
 
-	public byte[] loadImage() throws IOException {
-		BufferedImage bufferedImage = ImageIO.read(file);
-		WritableRaster raster = bufferedImage.getRaster();
-		DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
+	public void loadImage(BufferedImage img) {
+		currentImage = new ImagePanel(img);
+		DrawRoom.drawImage(currentImage);
 		
-		return data.getData();
+	}
+
+	public void loadImage(File f) throws IOException {
+		currentImage = new ImagePanel(f);
+		DrawRoom.drawImage(currentImage);
+		
 	}
 
 	public File chooseFile() {
 
-		JFileChooser file = new JFileChooser();
+		JFileChooser fc = new JFileChooser();
+		int f = fc.showOpenDialog(display.getAddImage());
 
-		Display.getMainFrame().add(file);
-		
-		file.setVisible(true);
+		if (f == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
 
-		return file.getSelectedFile();
+		}
+		System.out.println(file.getAbsolutePath());
+		return file;
 
 	}
 
@@ -61,4 +65,13 @@ public class ImageLoader {
 	public void setFile(File path) {
 		this.file = path;
 	}
+
+	public ImagePanel getCurrentImage() {
+		return currentImage;
+	}
+
+	public void setCurrentImage(ImagePanel currentImage) {
+		this.currentImage = currentImage;
+	}
+
 }
