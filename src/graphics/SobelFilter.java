@@ -15,9 +15,9 @@ public class SobelFilter {
 		for (int i = 1; i < img.getWidth()-2; i++){ 
 			for (int j = 1; j < img.getHeight()-2; j++){ 
 				
-				System.out.println(applyLaPlace(i, j));
-				break;
-				//image.setRGB(i, j, applyLaPlace(i,j));
+				//System.out.println(applyLaPlace(i, j));
+				
+				image.setRGB(i, j, applyLaPlace(i,j));
 				
 			}
 		}
