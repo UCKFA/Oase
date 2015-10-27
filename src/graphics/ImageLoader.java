@@ -1,45 +1,43 @@
 package graphics;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JMenuItem;
 
 public class ImageLoader {
 
-	private Display display;
+
 	private File file;
 	private ImagePanel currentImage;
+	private static JMenuItem openButton;
 
 	public ImageLoader() {
 
-		display = Display.getInstance();
-		display.getAddImage().addActionListener(new ActionListener() {
+	}
 
-			public void actionPerformed(ActionEvent evt) {
-				setFile(chooseFile());
+	public void openImage() {
+		try {
+			setFile(chooseFile());
+			loadImage(file);
 
-				try {
-					loadImage(file);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 
 	public void loadImage(BufferedImage img) {
 		currentImage = new ImagePanel(img);
 		DrawRoom.drawImage(currentImage);
-		
+
 	}
 
 	public void loadImage(File f) throws IOException {
 		currentImage = new ImagePanel(f);
+		System.out.println(currentImage.getSize());
 		DrawRoom.drawImage(currentImage);
 		
 	}
@@ -47,7 +45,7 @@ public class ImageLoader {
 	public File chooseFile() {
 
 		JFileChooser fc = new JFileChooser();
-		int f = fc.showOpenDialog(display.getAddImage());
+		int f = fc.showOpenDialog(openButton);
 
 		if (f == JFileChooser.APPROVE_OPTION) {
 			file = fc.getSelectedFile();

@@ -12,10 +12,12 @@ public class DrawRoom implements Runnable {
 	}
 
 	public static void drawImage(ImagePanel img) {
-		if (display.getImagePanel() != null) {
-			display.getMainFrame().remove(display.getImagePanel());
+		if (display.getMainImagePanel().getImage() != null) {
+			display.getMainFrame().remove(display.getMainImagePanel());
 		}
-		display.setImagePanel(img);
+		
+		display.setMainImagePanel(img);
+	
 
 	}
 
@@ -24,13 +26,11 @@ public class DrawRoom implements Runnable {
 		while (true) {
 			try {
 
-				if (display.getImagePanel() != null) {
-					display.getMainFrame().getContentPane().add(display.getImagePanel());
-					display.getImagePanel().revalidate();
+				if (display.getMainImagePanel().getImage() != null) {
+					display.getMainFrame().getContentPane().add(display.getMainImagePanel());
+					display.getMainImagePanel().revalidate();
 					display.getMainFrame().repaint();
 				}
-
-				System.out.println("rUNNING");
 				Thread.sleep(300);
 
 			} catch (InterruptedException e) {

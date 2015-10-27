@@ -11,9 +11,8 @@ public class Main {
 		display = Display.getInstance();
 		display.generateInitialWindow();
 		display.generateFileChooser();
-		display.generateFilterButton();
-		
-		
+	
+
 		DrawRoom drawRoom = new DrawRoom();
 	}
 	
