@@ -17,6 +17,8 @@ import javax.swing.KeyStroke;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
+import procedure.MainProc;
+
 /**
  * 
  * @author Brinzi's
@@ -198,6 +200,14 @@ public class MainFrame extends JFrame {
 										Short.MAX_VALUE)));
 
 		pack();
+		
+		analyzeButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				MainProc procedure = new MainProc();
+				System.out.println("Clicked");
+			}
+		});
 	}
 
 	public ImagePanel getImagePanel() {

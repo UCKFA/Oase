@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Opencv-3.0"/>
+	<classpathentry kind="lib" path="C:/Users/Stefan/Desktop/eclipse_workspace/Oase/lib/marvin/framework/marvin_1.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
