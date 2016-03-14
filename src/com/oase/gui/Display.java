@@ -1,4 +1,5 @@
-package graphics;
+package com.oase.gui;
+
 
 
 public class Display {
@@ -6,9 +7,6 @@ public class Display {
 	private MainFrame mainFrame;
 	private static Display instance = new Display();
 	private ImageLoader imLoader;
-
-	private Display() {
-	}
 
 	public static Display getInstance() {
 		if (Display.instance == null)

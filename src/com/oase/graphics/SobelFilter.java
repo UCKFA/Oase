@@ -1,6 +1,8 @@
-package graphics;
+package com.oase.graphics;
 
 import java.awt.image.BufferedImage;
+
+import com.oase.gui.ImagePanel;
 
 public class SobelFilter {
 

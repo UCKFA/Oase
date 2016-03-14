@@ -1,4 +1,4 @@
-package graphics;
+package com.oase.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
+
+import com.oase.graphics.DrawRoom;
 
 public class ImageLoader {
 

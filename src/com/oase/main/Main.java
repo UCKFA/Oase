@@ -1,5 +1,6 @@
-import graphics.Display;
-import graphics.DrawRoom;
+package com.oase.main;
+import com.oase.graphics.DrawRoom;
+import com.oase.gui.Display;
 
 
 public class Main {

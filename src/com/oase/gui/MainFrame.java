@@ -1,8 +1,10 @@
-package graphics;
+package com.oase.gui;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -17,7 +19,8 @@ import javax.swing.KeyStroke;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
-import procedure.MainProc;
+import com.oase.graphics.InterestPoint;
+import com.oase.procedures.MainProc;
 
 /**
  * 
@@ -44,7 +47,7 @@ public class MainFrame extends JFrame {
 	private ImagePanel imagePanel;
 	private JMenuItem jMenuItem1;
 	private JScrollPane jScrollPane1;
-	private JTextArea jTextArea1;
+	private JTextArea reportScreen;
 	private JMenuBar menuBar;
 	private JMenuItem openOption;
 	private JMenuItem saveAsOption;
@@ -61,7 +64,7 @@ public class MainFrame extends JFrame {
 		imagePanel = new ImagePanel();
 		analisisPanel = new JPanel();
 		jScrollPane1 = new JScrollPane();
-		jTextArea1 = new JTextArea();
+		reportScreen = new JTextArea("Please open image...");
 		analyzeButton = new JButton();
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu();
@@ -87,9 +90,10 @@ public class MainFrame extends JFrame {
 		imagePanelLayout.setVerticalGroup(imagePanelLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
 
-		jTextArea1.setColumns(20);
-		jTextArea1.setRows(5);
-		jScrollPane1.setViewportView(jTextArea1);
+		reportScreen.setColumns(20);
+		reportScreen.setRows(5);
+		reportScreen.setEditable(false);
+		jScrollPane1.setViewportView(reportScreen);
 
 		GroupLayout analisisPanelLayout = new GroupLayout(analisisPanel);
 		analisisPanel.setLayout(analisisPanelLayout);
@@ -204,10 +208,39 @@ public class MainFrame extends JFrame {
 		analyzeButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				MainProc procedure = new MainProc();
-				System.out.println("Clicked");
+						
+				MainProc.analyze();
 			}
 		});
+		
+		MouseListener listener = new MouseListener() {
+			
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void mouseClicked(MouseEvent e) {
+				MainProc.mainProc( e.getX() , e.getY());
+				imagePanel.drawCircle( e.getX() , e.getY() );
+			}
+		};
+		imagePanel.addMouseListener(listener);
 	}
 
 	public ImagePanel getImagePanel() {
@@ -224,6 +257,15 @@ public class MainFrame extends JFrame {
 
 	public void setOpenOption(JMenuItem openOption) {
 		this.openOption = openOption;
+	}
+
+	public JTextArea getReportScreen() {
+		return reportScreen;
+	}
+
+	public void setReportScreen(JTextArea reportScreen) {
+		this.reportScreen = reportScreen;
 	} 
+	
 
 }

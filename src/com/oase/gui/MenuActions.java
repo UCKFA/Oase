@@ -1,4 +1,5 @@
-package graphics;
+package com.oase.gui;
+
 
 public class MenuActions {
 	
@@ -6,8 +7,7 @@ public class MenuActions {
 	
 	public static void open(){
 		display =Display.getInstance();
-		display.getImLoader().openImage();
-		
+		display.getImLoader().openImage();		
 	}
 
 }
