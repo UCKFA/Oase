@@ -16,7 +16,6 @@ import com.imagedata.Comment;
 /**
  * Servlet implementation class GetComments
  */
-@WebServlet("/GetComments")
 public class GetComments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

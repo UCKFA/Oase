@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javafx.geometry.Point2D;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,6 +19,8 @@ import com.dbstuff.ImageSqlImplement;
 import com.imagedata.UserImage;
 import com.imageprocess.Analyzer;
 import com.userdata.User;
+
+import javafx.geometry.Point2D;
 
 /**
  * Servlet implementation class AddTopic
