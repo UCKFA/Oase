@@ -11,8 +11,8 @@ import java.util.List;
 
 public class User {
 
-	private String email, password, name, gender;
-	private int id;
+	private String email, password, name, surname , gender;
+	private int id, age;
 	private Date birthDate;
 	private List<Notification> myNotifications;
 
@@ -29,35 +29,25 @@ public class User {
 	 * @param name
 	 * @param email
 	 */
-	public User(int id, String name, String email, String gender, Date bdate) {
+	public User(int id, String name, String surname , String gender, Date bdate) {
 
-		this.email = email;
+		this.surname = surname;
 		this.name = name;
 		this.id = id;
 		this.gender = gender;
 		this.birthDate = bdate;
+		this.age = (int) getAge();
 		this.myNotifications = new ArrayList<Notification>();
 	}
 
-	/**
-	 * @param email
-	 * @param password
-	 * @param name
-	 */
-	public User(String email, String password, String name) {
+
+	public User( String name, String surname, String email, String date, String password) {
 
 		this.email = email;
 		this.password = password;
 		this.name = name;
-
-	}
-
-	public User(String email, String password, String name, String gender, String date) {
-
-		this.email = email;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
+		this.surname = surname;
+		
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		
@@ -87,22 +77,6 @@ public class User {
 		this.name = name;
 	}
 
-	/**
-	 * @param email
-	 * @param password
-	 * @param name
-	 * @param id
-	 * @param friendList
-	 * @param myNotifications
-	 */
-	public User(String email, String password, String name, int id, List<Notification> myNotifications) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.name = name;
-		this.id = id;
-		this.myNotifications = myNotifications;
-	}
 
 	public int getId() {
 		return id;
@@ -114,6 +88,16 @@ public class User {
 
 	public String getName() {
 		return name;
+	}
+	
+	
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public void setName(String name) {
@@ -172,6 +156,8 @@ public class User {
 		this.myNotifications = myNotifications;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -204,12 +190,17 @@ public class User {
 	}
 
 	public Date getBirthDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.birthDate;
 	}
 	
 	public long getAge(){
 		return   ChronoUnit.YEARS.between(birthDate.toLocalDate(), LocalDate.now());
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", password=" + password + ", name=" + name + ", surname=" + surname
+				+ ", gender=" + gender + ", id=" + id + ", birthDate=" + birthDate + "]";
 	}
 
 }

@@ -6,13 +6,16 @@
 }
 
 body {
-  padding: 0;
+  padding: 75px;
 }
+
 
 #user-testing-area {
   display : flex;
 }
-
+#draw-zone{
+  display: none;
+}
 #user-info{
   width: 17%;
   height: 200px;
@@ -94,3 +97,46 @@ body {
     border-bottom: 0;
   }
 }
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+.app-modal-window .modal-dialog {
+  max-width: 1200px;
+  width: 80%;
+}
+
+#current_image{
+  vertical-align: top;
+  float:right;
+ /*position: absolute;*/
+}
+
+#reference_model {
+  vertical-align: top;
+}
+
+
+
+

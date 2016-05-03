@@ -46,7 +46,7 @@ public class NotificationServlet extends HttpServlet {
 	 */
 
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException, IOException {/*
 		String data = request.getParameter("data");
 		String[] users = data.split(",");
 		response.setContentType("application/json");
@@ -61,7 +61,7 @@ public class NotificationServlet extends HttpServlet {
 		}
 
 	}
-
+/*
 	private void handleRejectRequest(String[] users) {
 		User userA = userDbActions.findUser(users[0]);
 		User userB = userDbActions.findUser(users[1]);
@@ -88,7 +88,7 @@ public class NotificationServlet extends HttpServlet {
 		// return lists;
 
 	}
-
+/*
 	@SuppressWarnings("unchecked")
 	private void updateNotificationLists(User a, String notid) {
 		int id = Integer.parseInt(notid);
@@ -133,5 +133,6 @@ public class NotificationServlet extends HttpServlet {
 				userB.getMyNotifications().size() - 1));
 
 	}
-
+*/
+	}
 }

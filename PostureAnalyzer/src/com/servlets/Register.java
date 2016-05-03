@@ -2,59 +2,54 @@ package com.servlets;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dbstuff.UserSqlImplement;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.userdata.User;
 
 /**
  * Servlet implementation class Register
  */
 
-public class Register extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	UserSqlImplement dbActions;
-
+public class Register extends LogIn {
+	
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * 
 	 */
-	public Register() {
+	private static final long serialVersionUID = 3520193582868313883L;
+	
+	 public Register() {
 		super();
-		dbActions = new UserSqlImplement();
 	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		User user = new User(request.getParameter("email"),
-				request.getParameter("password"),
-				request.getParameter("username"),
-				"M",
-				"09-05-1994");
+	
+	protected void doAction(HttpServletRequest request,
+			HttpServletResponse response) throws JsonIOException, JsonSyntaxException, IOException{
+		
+		JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
+	 System.out.println(obj);
+		response.setContentType("application/json");
+		
+		
+		User user = new User( obj.get("name").getAsString(),
+				obj.get("surname").getAsString(),			
+				obj.get("email").getAsString(),
+				obj.get("birthDate").getAsString(),
+				obj.get("password").getAsString()
+				);
+		
 		user.setId(user.hashCode());
-
+		System.out.println(user.toString());
 		dbActions.addItem(user);
-		response.sendRedirect("index.jsp");
-		// }
+		
 
+		
+		 
+		
+		
 	}
-
 }

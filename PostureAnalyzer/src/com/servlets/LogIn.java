@@ -1,16 +1,18 @@
 package com.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dbstuff.UserSqlImplement;
-import com.userdata.Notification;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.userdata.User;
 
 /**
@@ -23,12 +25,11 @@ public class LogIn extends HttpServlet {
 	 * @see HttpServlet#HttpServlet()
 	 */
 
-	UserSqlImplement dbActions;
+	protected UserSqlImplement dbActions;
 
 	public LogIn() {
 		super();
 		dbActions = new UserSqlImplement();
-
 	}
 
 	/**
@@ -46,34 +47,25 @@ public class LogIn extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+		
+		doAction(request, response);
+		
 
-		User user = new User(request.getParameter("email"),
-				request.getParameter("password"));
-		// System.out.println(user.getEmail() + user.getPassword());
+	}
+	protected void doAction(HttpServletRequest request,
+			HttpServletResponse response) throws JsonIOException, JsonSyntaxException, IOException{
+		JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
+		response.setContentType("application/json");
+		
+		
+		User user = new User(obj.get("email").getAsString(),
+				obj.get("password").getAsString());
+		 
 		if ((user = dbActions.findUser(user.hashCode())) != null) {
-
-			//loadUserLists(user);
-			// user.addFriend(dbActions.findUser(106323914));
-			// dbActions.loadFriendList(user.getFriendList(), user.getId());
-			// System.out.println(user.getMyNotifications().get(0));
-
-			// String notifications= new
-			// Gson().toJson(user.getMyNotifications());
-
-			request.getSession().setAttribute("currentUser", user);
-			
-			// request.getSession().setAttribute("notificationList",
-			// notifications);
-			Cookie userid = new Cookie("userId", "" + user.getId());
-			userid.setMaxAge(60 * 60 * 24);
-
-			response.addCookie(userid);
-
-			response.sendRedirect("main.jsp");
-
+			response.getWriter().println(new Gson().toJson(user));
+		
 		}
-
+		
 	}
 /*
 	@SuppressWarnings("unchecked")

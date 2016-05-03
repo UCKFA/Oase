@@ -8,7 +8,7 @@
  * Controller of the oaseApp
  */
 angular.module('oaseApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope,$uibModal,$sessionStorage,$log) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -26,6 +26,7 @@ angular.module('oaseApp')
         "recommendation": "Go to home."
       }
     ];
+    $scope.user = $sessionStorage.user;
 
     $scope.selectedReport = -1;
     $scope.toggleReport = function (index) {
@@ -34,4 +35,41 @@ angular.module('oaseApp')
       else
         $scope.selectedReport = index;
     };
+
+    $scope.loadImage = function () {
+      $scope.openModal('lg');
+    };
+
+
+
+    $scope.items = ['image_modal'];
+    $scope.animationsEnabled = true;
+
+    $scope.openModal = function (size) {
+
+      var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'views/image_modal.html',
+        controller: 'ModalInstanceCtrl',
+        size: size,
+        windowClass: 'gruntapp-modal-window',
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    $scope.toggleAnimation = function () {
+      $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
   });
+
